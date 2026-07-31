@@ -5,18 +5,27 @@ import pandas as pd
 
 app = FastAPI(title="Real Estate ML API")
 
-# Load the saved model
+# Load the saved model trained on the Ames dataset
 model = joblib.load('xgb_model.pkl')
 
-# Tell the API what inputs to expect
+# Define the exact inputs the user will send
 class PropertyFeatures(BaseModel):
-    sqft: float
-    bedrooms: int
-    age: int
+    Gr_Liv_Area: float
+    Bedroom_AbvGr: int
+    Year_Built: int
+    Full_Bath: int
 
-# Create the prediction link
 @app.post("/predict")
 def predict_price(features: PropertyFeatures):
-    input_data = pd.DataFrame([features.dict()])
+    # Map the incoming API variables back to the exact column names the model learned
+    input_data = pd.DataFrame([{
+        'Gr Liv Area': features.Gr_Liv_Area,
+        'Bedroom AbvGr': features.Bedroom_AbvGr,
+        'Year Built': features.Year_Built,
+        'Full Bath': features.Full_Bath
+    }])
+    
+    # Predict
     prediction = model.predict(input_data)
+    
     return {"predicted_price": float(prediction[0])}

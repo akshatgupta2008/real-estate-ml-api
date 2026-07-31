@@ -1,19 +1,26 @@
 import pandas as pd
 import xgboost as xgb
 import joblib
-from sklearn.datasets import make_regression
 
-print("Training the AI model...")
+print("Loading AmesHousing dataset...")
+# Load the dataset
+df = pd.read_csv('AmesHousing.csv')
 
-# Creating fake data just for testing today
-X, y = make_regression(n_samples=1000, n_features=3, noise=0.1, random_state=42)
-X_train = pd.DataFrame(X, columns=['sqft', 'bedrooms', 'age'])
-y_train = pd.Series(y)
+# 1. Select strong predictive columns
+feature_columns = ['Gr Liv Area', 'Bedroom AbvGr', 'Year Built', 'Full Bath']
+target_column = 'SalePrice'
 
-# Train the XGBoost model
+# 2. Filter the dataframe and drop any missing values in our chosen columns
+data = df[feature_columns + [target_column]].dropna()
+
+X_train = data[feature_columns]
+y_train = data[target_column]
+
+print("Training the XGBoost model on real data...")
+# 3. Train the model
 model = xgb.XGBRegressor(n_estimators=100, learning_rate=0.1)
 model.fit(X_train, y_train)
 
-# Save the model to a file
+# 4. Save the updated model
 joblib.dump(model, 'xgb_model.pkl')
-print("Success! Model saved.")
+print("Success! New model saved.")
