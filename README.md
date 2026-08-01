@@ -1,20 +1,52 @@
-# Advanced Real Estate ML Forecaster
+# Real Estate ML Forecaster
 
-An end-to-end Machine Learning microservice and web application that predicts real estate prices based on historical housing data. 
+An end-to-end Machine Learning web application and API service that predicts real estate prices based on property features.
 
-## 🚀 Architecture
-This project uses a decoupled architecture to separate the machine learning workloads from the user interface:
-* **AI Engine:** XGBoost Regressor trained on the Ames Housing Dataset.
-* **Backend API:** FastAPI (Python) for robust, type-checked data validation and model inference.
-* **Frontend:** React.js (Vite) for a seamless, interactive user dashboard.
-* **Deployment:** Fully containerized using Docker for easy scaling.
+## 📁 Repository Structure
 
-## 🧠 Machine Learning Pipeline
-* **Data Processing:** Cleaned and engineered features using Pandas (focusing on Living Area, Bedrooms, Year Built, and Bathrooms).
-* **Model:** XGBoost was chosen for its high performance on tabular data and robust handling of non-linear relationships.
-* **Serialization:** The trained model is serialized using `joblib` for rapid loading into the FastAPI microservice.
+```
+real-estate-ml-api/
+├── backend/                  # Python FastAPI Backend & ML Model
+│   ├── main.py               # FastAPI server endpoints
+│   ├── model.py              # XGBoost training pipeline script
+│   ├── xgb_model.pkl         # Trained XGBoost model
+│   ├── AmesHousing.csv       # Training dataset
+│   ├── requirements.txt      # Python dependencies
+│   └── Dockerfile            # Container configuration
+│
+├── frontend/                 # React.js + Vite Web Application
+│   ├── src/                  # Components, styles, and UI logic
+│   ├── public/               # Static assets
+│   ├── package.json          # Node.js dependencies & scripts
+│   └── vite.config.js        # Vite configuration
+│
+└── README.md
+```
 
-## 💻 How to Run Locally
-1. Clone the repository.
-2. Start the FastAPI backend: `uvicorn main:app --reload` (runs on port 8000).
-3. Start the React frontend: `npm run dev` (runs on port 5173).
+## 🚀 How to Run Locally
+
+### 1. Start the Backend API (Python / FastAPI)
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
+The FastAPI backend will start at `http://127.0.0.1:8000`.
+
+### 2. Start the Frontend (React / Vite)
+```bash
+cd frontend
+npm install
+npm run dev
+```
+The frontend application will start at `http://localhost:5173`.
+
+---
+
+## 🐳 Docker Deployment (Backend)
+To run the backend inside a Docker container:
+```bash
+cd backend
+docker build -t real-estate-backend .
+docker run -p 8000:8000 real-estate-backend
+```
