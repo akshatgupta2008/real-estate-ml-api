@@ -288,9 +288,32 @@
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
 }
 
+/* Quality Range Slider Input */
+.quality-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.range-slider {
+  accent-color: #4f46e5;
+  cursor: pointer;
+  height: 6px;
+}
+
+.quality-badge {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #4f46e5;
+  padding: 0.25rem 0.6rem;
+  background: #eef2ff;
+  border-radius: 8px;
+  align-self: flex-start;
+}
+
 .submit-btn {
   width: 100%;
-  margin-top: 1.3rem;
+  margin-top: 1.4rem;
   padding: 1rem 1rem;
   border: none;
   border-radius: 999px;
@@ -312,10 +335,37 @@
   cursor: wait;
 }
 
-/* Result Card */
+/* Result Card & Header */
 .result-card {
   display: flex;
   flex-direction: column;
+}
+
+.print-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.print-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.print-btn:hover {
+  background: #4f46e5;
+  color: #ffffff;
+  border-color: #4f46e5;
 }
 
 .result-body {
@@ -329,7 +379,7 @@
   border-radius: 18px;
   border: 1px dashed #c7d2fe;
   background: linear-gradient(145deg, #f8fafc, #eef2ff);
-  min-height: 220px;
+  min-height: 200px;
 }
 
 .result-success {
@@ -420,6 +470,73 @@
   to { transform: rotate(360deg); }
 }
 
+/* Renovation ROI Simulator Section */
+.roi-section {
+  margin-top: 1.25rem;
+  padding: 1.1rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+}
+
+.roi-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.roi-icon {
+  width: 1.2rem;
+  height: 1.2rem;
+  color: #4f46e5;
+}
+
+.roi-header h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #0f172a;
+}
+
+.roi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.roi-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.65rem 0.8rem;
+  background: #f8fafc;
+  border: 1px solid #f1f5f9;
+  border-radius: 12px;
+}
+
+.roi-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.roi-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.roi-value {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #16a34a;
+}
+
+.roi-subtext {
+  font-size: 0.73rem;
+  color: #64748b;
+}
+
 /* Analytics Tab */
 .analytics-tab {
   max-width: 1100px;
@@ -461,6 +578,10 @@
 
 .chart-wrapper {
   margin-top: 0.5rem;
+}
+
+.neighborhood-card {
+  margin-bottom: 1.5rem;
 }
 
 .feature-card {
@@ -507,12 +628,30 @@
   transition: width 0.6s ease;
 }
 
-/* Responsive Breakpoints */
+/* Responsive & Print Styles */
 @media (max-width: 900px) {
   .hero-panel,
   .content-grid,
   .charts-grid,
-  .kpi-banner {
+  .kpi-banner,
+  .roi-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  .app-shell {
+    background: #fff;
+    padding: 0;
+  }
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+  .card {
+    box-shadow: none;
+    border: 1px solid #ccc;
   }
 }

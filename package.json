@@ -6,7 +6,8 @@
   "scripts": {
     "start:backend": "env\\Scripts\\python.exe -m uvicorn main:app --reload --app-dir backend",
     "start:frontend": "npm --prefix frontend run dev",
-    "start": "concurrently -k -p \"[{name}]\" -n \"backend,frontend\" -c \"yellow,cyan\" \"npm run start:backend\" \"npm run start:frontend\""
+    "start": "concurrently -k -p \"[{name}]\" -n \"backend,frontend\" -c \"yellow,cyan\" \"npm run start:backend\" \"npm run start:frontend\"",
+    "dev": "npm run start"
   },
   "devDependencies": {
     "concurrently": "^9.1.2"
