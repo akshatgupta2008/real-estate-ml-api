@@ -20,30 +20,53 @@ real-estate-ml-api/
 │   ├── package.json          # Node.js dependencies & scripts
 │   └── vite.config.js        # Vite configuration
 │
-├── docs/
-│   └── app_preview.png       # Application UI screenshot
+├── docs/                     # UI Screenshots & Documentation Assets
+│   ├── valuation_hero.png    # Valuation Estimator overview & KPI header
+│   ├── valuation_roi.png     # Property form & Renovation ROI Simulator
+│   ├── analytics_charts.png  # Historical price trends & size tier charts
+│   └── neighborhood_features.png # Neighborhood price comparison & feature weights
+│
 ├── package.json              # Root single-command starter configuration
 └── README.md
 ```
 
 ## 🖼️ Application Interface & Features
 
-![Application Preview](docs/app_preview.png)
+### 1. Valuation Estimator & Live Property Snapshot
+![Valuation Estimator Overview](docs/valuation_hero.png)
 
-### Key Features & Dashboard Modules
+- **AI Valuation Engine**: Monotonic XGBoost regression model trained on 2,930 Ames housing transactions ($R^2 = 88.1\%$).
+- **Live Dataset KPI Bar**: Displays total dataset sample count (`2,929` properties), average market price (`$180,806`), and average price per sq ft (`$121 / sq ft`).
+- **Property Snapshot Card**: Real-time summary of living area, overall quality rating, bedrooms, bathrooms, and garage capacity.
 
-- **AI Valuation Estimator Tab**:
-  - **Monotonic Valuation Engine**: Powered by XGBoost trained with `monotone_constraints` ($R^2 = 88.1\%$). Ensures that increasing quality, bedrooms, bathrooms, living area, or garage capacity strictly increases or maintains property value.
-  - **Inputs**: Above Ground Living Area (`Gr_Liv_Area`), Overall Quality Rating (`Overall_Qual` 1–10), Full Bathrooms (`Full_Bath`), Bedrooms (`Bedroom_AbvGr`), Garage Cars (`Garage_Cars`), Year Built (`Year_Built`).
-  - **Renovation & Upgrade ROI Simulator**: Calculates estimated value gains for +1 Bathroom, +1 Quality level, +1 Garage space, and +500 sq ft living area.
-  - **Printable Valuation Report**: Export property valuation summaries as a formatted PDF/Print report.
+---
 
-- **Market Analytics Dashboard Tab**:
-  - **Dataset KPI Bar**: Overall dataset sample size (`2,930` properties), average sale price (`$180,796`), and avg price/sq ft (`$120.73`).
-  - **Historical Trajectory (Area Chart)**: Interactive decade-by-decade home price trends (1950s–2010s).
-  - **Property Size Brackets (Bar Chart)**: Average sale price and price/sq ft breakdown by living area size tiers.
-  - **Neighborhood Price Comparison**: Horizontal bar chart comparing average home valuations across 28 Ames residential neighborhoods.
-  - **XGBoost Model Feature Impact**: Relative feature importance percentages (Overall Quality ~62%, Living Area ~24%, Garage ~7%, Year Built ~4%, Bathrooms ~3%).
+### 2. Interactive Parameters & Renovation ROI Simulator
+![Valuation Form & ROI Simulator](docs/valuation_roi.png)
+
+- **Interactive Property Controls**:
+  - **Living Area (sq ft)**: Adjustable slider / input.
+  - **Overall Quality Rating (1–10)**: Rated from *1 (Very Poor)* to *10 (Luxury/Custom)*.
+  - **Full Bathrooms, Bedrooms, Garage Capacity (Cars), Year Built**.
+- **Smart Estimate Output**: Instant price calculation with price per sq ft and market percentile rank (`78.3th percentile`).
+- **Renovation ROI Simulator**: Real-time dollar additions for property upgrades (`+1 Full Bath -> +$9,093`, `Quality Upgrade -> +$32,596`, `+1 Garage Space -> +$25,064`, `+500 sq ft -> +$36,687`).
+- **Print Valuation Report**: One-click printable PDF report exporter.
+
+---
+
+### 3. Market Analytics & Historical Trajectory
+![Market Analytics & Historical Trends](docs/analytics_charts.png)
+
+- **Historical Era Trajectory (Area Chart)**: Gradient chart tracking average sale price evolution from the 1870s to 2010s.
+- **Property Size Brackets (Bar Chart)**: Average sale price comparison across square footage brackets (`<1,000`, `1,000-1,500`, `1,500-2,000`, `2,000-2,500`, `>2,500` sq ft).
+
+---
+
+### 4. Neighborhood Analysis & XGBoost Feature Weights
+![Neighborhood Price Analysis & Feature Importance](docs/neighborhood_features.png)
+
+- **Neighborhood Price Ranking**: Horizontal bar chart comparing average property valuations across top Ames residential neighborhoods (*Northridge Heights*, *Somerset*, *College Creek*, *Old Town*, etc.).
+- **XGBoost Feature Weight Distribution**: Explanability progress bars showing relative feature importance weights (*Overall Quality Rating: 59.1%*, *Garage Capacity: 20.8%*, *Living Area: 9.5%*, etc.).
 
 ---
 
