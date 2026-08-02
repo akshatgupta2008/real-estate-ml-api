@@ -1,3 +1,4 @@
+from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -6,16 +7,17 @@ import pandas as pd
 
 app = FastAPI(title="Real Estate ML API")
 
-# Allow web browsers to talk to this API
+# Configure CORS (allow_credentials=True with allow_origins=["*"] triggers browser security warnings)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allows all origins
-    allow_credentials=True,
-    allow_methods=["*"],  # Allows all methods
-    allow_headers=["*"],  # Allows all headers
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
-model = joblib.load('xgb_model.pkl')
+MODEL_PATH = Path(__file__).parent / "xgb_model.pkl"
+model = joblib.load(MODEL_PATH)
 
 class PropertyFeatures(BaseModel):
     Gr_Liv_Area: float

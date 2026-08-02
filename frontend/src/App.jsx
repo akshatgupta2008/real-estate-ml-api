@@ -17,7 +17,7 @@ function App() {
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setFormData({ ...formData, [name]: Number(value) })
+    setFormData({ ...formData, [name]: value === '' ? '' : Number(value) })
   }
 
   const handleSubmit = async (e) => {
@@ -89,24 +89,24 @@ function App() {
           </div>
 
           <div className="form-grid">
-            <label className="field">
+            <label htmlFor="Gr_Liv_Area" className="field">
               <span>Above Ground Living Area</span>
-              <input type="number" name="Gr_Liv_Area" min="1" value={formData.Gr_Liv_Area} onChange={handleChange} />
+              <input id="Gr_Liv_Area" type="number" name="Gr_Liv_Area" min="1" value={formData.Gr_Liv_Area} onChange={handleChange} />
             </label>
 
-            <label className="field">
+            <label htmlFor="Bedroom_AbvGr" className="field">
               <span>Number of Bedrooms</span>
-              <input type="number" name="Bedroom_AbvGr" min="0" value={formData.Bedroom_AbvGr} onChange={handleChange} />
+              <input id="Bedroom_AbvGr" type="number" name="Bedroom_AbvGr" min="0" value={formData.Bedroom_AbvGr} onChange={handleChange} />
             </label>
 
-            <label className="field">
+            <label htmlFor="Year_Built" className="field">
               <span>Year Built</span>
-              <input type="number" name="Year_Built" min="1800" value={formData.Year_Built} onChange={handleChange} />
+              <input id="Year_Built" type="number" name="Year_Built" min="1800" value={formData.Year_Built} onChange={handleChange} />
             </label>
 
-            <label className="field">
+            <label htmlFor="Full_Bath" className="field">
               <span>Full Bathrooms</span>
-              <input type="number" name="Full_Bath" min="0" value={formData.Full_Bath} onChange={handleChange} />
+              <input id="Full_Bath" type="number" name="Full_Bath" min="0" value={formData.Full_Bath} onChange={handleChange} />
             </label>
           </div>
 
