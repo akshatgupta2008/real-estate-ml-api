@@ -1,7 +1,8 @@
 """
 Real Estate ML Pipeline: 5-Fold Cross Validation & Model Evaluation Benchmark
 -----------------------------------------------------------------------------
-Evaluates Linear Regression, Random Forest, and Monotonic XGBoost Regressors.
+Evaluates Linear Regression, Random Forest, and Monotonic XGBoost Regressors
+across 23 comprehensive property features.
 Metrics: R² Score, RMSE ($), MAE ($)
 """
 
@@ -23,14 +24,16 @@ from sklearn.ensemble import RandomForestRegressor
 
 from src.data_processing import load_and_preprocess_data
 
+MONOTONE_CONSTRAINTS = "(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)"
+
 def run_ds_benchmark():
-    print("=" * 70)
+    print("=" * 75)
     print("      AMES REAL ESTATE VALUATION MODEL BENCHMARK & EVALUATION      ")
-    print("=" * 70)
+    print("=" * 75)
     
     # 1. Load Preprocessed Data
     X, y = load_and_preprocess_data()
-    print(f"\n[1] Cleaned Dataset Loaded: {X.shape[0]} observations, {X.shape[1]} features.")
+    print(f"\n[1] Dataset Loaded: {X.shape[0]} observations, {X.shape[1]} features.")
     print(f"    Target Variable: SalePrice (Mean: ${y.mean():,.2f}, Median: ${y.median():,.2f}, Std: ${y.std():,.2f})")
     
     # 2. 5-Fold Cross Validation Setup
@@ -39,14 +42,14 @@ def run_ds_benchmark():
     
     models = {
         "Linear Regression (Baseline)": LinearRegression(),
-        "Random Forest Regressor": RandomForestRegressor(n_estimators=100, random_state=42),
+        "Random Forest Regressor": RandomForestRegressor(n_estimators=150, random_state=42),
         "Monotonic XGBoost Regressor": xgb.XGBRegressor(
-            n_estimators=220,
-            learning_rate=0.05,
+            n_estimators=250,
+            learning_rate=0.04,
             max_depth=5,
             subsample=0.85,
             colsample_bytree=0.85,
-            monotone_constraints='(1, 1, 1, 1, 0, 1, 1)',
+            monotone_constraints=MONOTONE_CONSTRAINTS,
             random_state=42
         )
     }
@@ -72,7 +75,7 @@ def run_ds_benchmark():
     print(df_results.to_string(index=False))
     print("------------------------------------------\n")
     
-    # 3. Monotonic XGBoost Production Feature Importances
+    # 3. Monotonic XGBoost Feature Importances
     prod_model = models["Monotonic XGBoost Regressor"]
     prod_model.fit(X, y)
     importances = prod_model.feature_importances_
@@ -82,9 +85,10 @@ def run_ds_benchmark():
     for feat, imp in feat_imp:
         print(f"    - {feat:25s}: {imp*100:6.2f}%")
         
-    print("\n" + "=" * 70)
+    print("\n" + "=" * 75)
     print("             REAL ESTATE BENCHMARK EVALUATION COMPLETE             ")
-    print("=" * 70)
+    print("=" * 75)
+    return df_results
 
 if __name__ == '__main__':
     run_ds_benchmark()

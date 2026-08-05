@@ -18,9 +18,17 @@ import pandas as pd
 import numpy as np
 import xgboost as xgb
 
-from src.data_processing import load_and_preprocess_data
+from src.data_processing import load_and_preprocess_data, preprocess_input_dict, FEATURE_COLUMNS
 
 MODEL_SAVE_PATH = Path(__file__).parent / "xgb_model.pkl"
+MONOTONE_CONSTRAINTS = "(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)"
+
+def load_or_train_model():
+    """Loads serialized XGBoost model or trains it if missing."""
+    if not MODEL_SAVE_PATH.exists():
+        train_and_serialize_model()
+    return joblib.load(MODEL_SAVE_PATH)
+
 
 def train_and_serialize_model() -> Path:
     """Fits Monotonic XGBoost on preprocessed dataset and serializes to disk."""
@@ -31,12 +39,12 @@ def train_and_serialize_model() -> Path:
     X, y = load_and_preprocess_data()
     
     model = xgb.XGBRegressor(
-        n_estimators=220,
-        learning_rate=0.05,
+        n_estimators=250,
+        learning_rate=0.04,
         max_depth=5,
         subsample=0.85,
         colsample_bytree=0.85,
-        monotone_constraints='(1, 1, 1, 1, 0, 1, 1)',
+        monotone_constraints=MONOTONE_CONSTRAINTS,
         random_state=42
     )
     
@@ -46,17 +54,32 @@ def train_and_serialize_model() -> Path:
     print(f"[SUCCESS] Model trained and serialized to: '{MODEL_SAVE_PATH.resolve()}'")
     
     # Test Sample Predict
-    sample_input = pd.DataFrame([{
-        'Overall Qual': 8,
+    sample_raw = {
+        'Overall Qual': 'Good',
+        'Overall_Cond': 6,
         'Gr Liv Area': 2100,
+        'Total_Bsmt_SF': 1100,
+        'First_Flr_SF': 1200,
+        'Second_Flr_SF': 900,
+        'Garage_Area': 500,
         'Garage Cars': 2,
         'Full Bath': 2,
+        'Half_Bath': 1,
+        'Bsmt_Full_Bath': 1,
         'Bedroom AbvGr': 3,
+        'TotRms_AbvGrd': 7,
+        'Fireplaces': 1,
+        'Lot_Area': 10500,
+        'Wood_Deck_SF': 140,
+        'Open_Porch_SF': 50,
         'Year Built': 2005,
-        'Qual_Area_Interaction': 8 * 2100
-    }])
+        'Year_Remod_Add': 2008,
+        'Exter_Qual': 'Gd',
+        'Kitchen_Qual': 'Gd'
+    }
     
-    pred_val = model.predict(sample_input)[0]
+    sample_df = preprocess_input_dict(sample_raw)
+    pred_val = model.predict(sample_df)[0]
     print(f" -> Sample Property Valuation Estimate: ${pred_val:,.2f}")
     return MODEL_SAVE_PATH
 
