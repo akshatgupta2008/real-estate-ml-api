@@ -234,12 +234,13 @@ feat_imp.head(10)"""))
 
 cells2.append(nbf.v4.new_markdown_cell("## 4. Visualizing Feature Importance Distribution"))
 cells2.append(nbf.v4.new_code_cell("""plt.figure(figsize=(10, 6))
-sns.barplot(data=feat_imp.head(10), x='Importance (%)', y='Feature', palette='crest')
+sns.barplot(data=feat_imp.head(10), x='Importance (%)', y='Feature', hue='Feature', palette='crest', legend=False)
 plt.title('Top 10 Monotonic XGBoost Feature Importances (Gain Weight)')
 plt.xlabel('Importance (%)')
 plt.ylabel('Feature Dimension')
 plt.tight_layout()
 plt.show()"""))
+
 
 nb2.cells = cells2
 nbf.write(nb2, notebooks_dir / "02_model_training_and_eval.ipynb")
