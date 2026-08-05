@@ -1,105 +1,102 @@
-# Real Estate ML Forecaster & Market Analytics Platform
+# End-to-End Data Science, Machine Learning & Algorithmic Practice Portfolio
 
-An end-to-end Machine Learning web application and analytics platform that predicts real estate values with monotonicity constraints ($R^2 = 88.1\%$) and delivers interactive market insights based on property parameters.
+A production-grade Python repository designed to showcase core technical capabilities for **Data Science, Machine Learning, and Software Engineering** roles.
+
+---
+
+## 📌 Technical Highlights & Portfolio Overview
+
+This project is structured into four core engineering modules:
+
+### 1. 🐍 Python Core, Data Structures & Algorithms (`python_fundamentals/`)
+- **Syntax, Declarations & Traversal**: Dynamic declarations, primitive types, array slicing, mutability, and traversal techniques (`for`, `range(len())`, `enumerate`, list comprehensions).
+- **Array Operations & Algorithms**: Built-in array operations (search, sort, insert, delete) vs manual algorithmic implementations (Linear Search vs Binary Search, Bubble Sort vs Quick Sort vs Timsort).
+- **Algorithmic Problem Solving Practice**: 10 Easy-to-Medium interview coding challenges with time/space complexity analysis and unit test assertions (Two Sum, Kadane's Algorithm, In-place Reversal, Valid Anagram, Binary Search, etc.).
+
+### 2. 📊 Data Science Core Suite (`data_science_core/`)
+- **NumPy & Pandas**: Array vectorization, matrix math, Pandas DataFrames indexing (`loc`/`iloc`), missing data imputation, `groupby` aggregations, and dataset merges.
+- **Visualization Suite**: Matplotlib & Seaborn plots (Histograms/KDE distributions, Boxplots for outlier detection, Scatter regression trendlines, Annotated Seaborn correlation heatmaps).
+- **Machine Learning Foundations**: Applied reference implementation of Regression (Linear, Ridge, Lasso), Classification (Logistic Regression, Decision Trees, Random Forests), and Clustering (K-Means, PCA 2D reduction) + Metric suite (Accuracy, Precision, Recall, F1, ROC-AUC, RMSE, MAE, $R^2$, Silhouette Score).
+
+### 3. 🤖 End-to-End Machine Learning Case Studies (`projects/`)
+- **Case Study 1: Real Estate Monotonic XGBoost Valuation Pipeline**
+  - **Dataset**: Ames Housing Dataset (2,924 records, 80 features).
+  - **Key Metrics**: **$R^2 = 86.6\%$**, **$\text{RMSE} = \$28,619$**, **$\text{MAE} = \$20,043$**.
+  - **Key Innovation**: Enforced domain monotonicity constraints (`monotone_constraints`) and engineered `Quality x Area` interaction terms to eliminate pricing inversions.
+- **Case Study 2: Passenger Survival Binary Classification Pipeline**
+  - **Dataset**: Passenger Manifest Dataset (891 records).
+  - **Key Metrics**: **Accuracy = $83.1\%$**, **Precision = $81.6\%$**, **ROC-AUC = $0.8715$**.
+  - **Key Innovation**: Scikit-Learn `ColumnTransformer` preprocessing pipelines (median/mode imputation, scaling, one-hot encoding) evaluated across 5-Fold Stratified Cross-Validation.
+
+### 4. 📄 Resume & Technical Interview Guide (`docs/`)
+- **Resume-Ready Bullet Points**: Copy-and-paste metrics and technical bullet points for resumes.
+- **Elevator Pitches & REACT Framework**: 60-second project summaries, REACT problem-solving communication framework, and technical Q&A cheatsheet.
+
+---
 
 ## 📁 Repository Structure
 
 ```
 real-estate-ml-api/
-├── backend/                  # Python FastAPI Backend & Monotonic ML Model
-│   ├── main.py               # FastAPI endpoints, ROI simulator & analytics
-│   ├── model.py              # XGBoost training pipeline script with monotonicity
-│   ├── xgb_model.pkl         # Trained XGBoost regression model
-│   ├── AmesHousing.csv       # Dataset for ML training & market analytics
-│   ├── requirements.txt      # Python dependencies
-│   └── Dockerfile            # Container configuration
 │
-├── frontend/                 # React.js + Vite Web Application
-│   ├── src/                  # Components, styles, Recharts graphs & icons
-│   ├── public/               # Static assets
-│   ├── package.json          # Node.js dependencies & scripts
-│   └── vite.config.js        # Vite configuration
+├── python_fundamentals/                  # Module 1: Python Core & Problem Solving
+│   ├── 01_syntax_declarations_arrays.py  # Declarations, array structures, traversal methods
+│   ├── 02_array_operations_algorithms.py # Built-in ops, Linear/Binary search, Sorting algorithms
+│   └── 03_problem_solving_practice.py    # 10 Easy-to-Medium interview coding challenges
 │
-├── docs/                     # UI Screenshots & Documentation Assets
-│   ├── valuation_hero.png    # Valuation Estimator overview & KPI header
-│   ├── valuation_roi.png     # Property form & Renovation ROI Simulator
-│   ├── analytics_charts.png  # Historical price trends & size tier charts
-│   └── neighborhood_features.png # Neighborhood price comparison & feature weights
+├── data_science_core/                    # Module 2: Data Science & ML Reference Suite
+│   ├── 01_numpy_pandas_basics.py         # NumPy vectorization & Pandas DataFrames manipulation
+│   ├── 02_visualization_matplotlib_seaborn.py # Publication-grade EDA charts
+│   └── 03_ml_algorithms_and_metrics.py   # Regression, Classification & Clustering algorithms + metrics
 │
-├── package.json              # Root single-command starter configuration
+├── projects/                             # Module 3: End-to-End ML Case Studies
+│   ├── 01_ames_housing_valuation/
+│   │   ├── case_study_overview.md       # Case Study architecture & metrics breakdown
+│   │   ├── pipeline.ipynb               # Executable Jupyter Notebook
+│   │   ├── pipeline.py                  # 5-Fold CV benchmark script
+│   │   └── AmesHousing.csv              # Ames dataset
+│   │
+│   └── 02_titanic_survival_classification/
+│       ├── case_study_overview.md       # Case Study architecture & metrics breakdown
+│       ├── pipeline.ipynb               # Executable Jupyter Notebook
+│       ├── pipeline.py                  # Classification benchmark script
+│       └── titanic.csv                  # Dataset
+│
+├── docs/                                 # Module 4: Resume & Interview Prep Guide
+│   └── resume_and_interview_guide.md     # Resume bullet points, pitches & technical Q&A
+│
+├── requirements.txt                      # Python dependencies
 └── README.md
 ```
 
-## 🖼️ Application Interface & Features
-
-### 1. Valuation Estimator & Live Property Snapshot
-![Valuation Estimator Overview](docs/valuation_hero.png)
-
-- **AI Valuation Engine**: Monotonic XGBoost regression model trained on 2,930 Ames housing transactions ($R^2 = 88.1\%$).
-- **Live Dataset KPI Bar**: Displays total dataset sample count (`2,929` properties), average market price (`$180,806`), and average price per sq ft (`$121 / sq ft`).
-- **Property Snapshot Card**: Real-time summary of living area, overall quality rating, bedrooms, bathrooms, and garage capacity.
-
 ---
 
-### 2. Interactive Parameters & Renovation ROI Simulator
-![Valuation Form & ROI Simulator](docs/valuation_roi.png)
+## ⚡ Execution Instructions
 
-- **Interactive Property Controls**:
-  - **Living Area (sq ft)**: Adjustable slider / input.
-  - **Overall Quality Rating (1–10)**: Rated from *1 (Very Poor)* to *10 (Luxury/Custom)*.
-  - **Full Bathrooms, Bedrooms, Garage Capacity (Cars), Year Built**.
-- **Smart Estimate Output**: Instant price calculation with price per sq ft and market percentile rank (`78.3th percentile`).
-- **Renovation ROI Simulator**: Real-time dollar additions for property upgrades (`+1 Full Bath -> +$9,093`, `Quality Upgrade -> +$32,596`, `+1 Garage Space -> +$25,064`, `+500 sq ft -> +$36,687`).
-- **Print Valuation Report**: One-click printable PDF report exporter.
-
----
-
-### 3. Market Analytics & Historical Trajectory
-![Market Analytics & Historical Trends](docs/analytics_charts.png)
-
-- **Historical Era Trajectory (Area Chart)**: Gradient chart tracking average sale price evolution from the 1870s to 2010s.
-- **Property Size Brackets (Bar Chart)**: Average sale price comparison across square footage brackets (`<1,000`, `1,000-1,500`, `1,500-2,000`, `2,000-2,500`, `>2,500` sq ft).
-
----
-
-### 4. Neighborhood Analysis & XGBoost Feature Weights
-![Neighborhood Price Analysis & Feature Importance](docs/neighborhood_features.png)
-
-- **Neighborhood Price Ranking**: Horizontal bar chart comparing average property valuations across top Ames residential neighborhoods (*Northridge Heights*, *Somerset*, *College Creek*, *Old Town*, etc.).
-- **XGBoost Feature Weight Distribution**: Explanability progress bars showing relative feature importance weights (*Overall Quality Rating: 59.1%*, *Garage Capacity: 20.8%*, *Living Area: 9.5%*, etc.).
-
----
-
-## ⚡ API Endpoints (FastAPI)
-
-| Endpoint | Method | Description |
-| :--- | :--- | :--- |
-| `/predict` | `POST` | Generates estimated home value, $/sq ft, and market percentile rank. |
-| `/analytics/roi-simulator` | `POST` | Calculates instant valuation ROI deltas for home renovations & upgrades. |
-| `/analytics/kpis` | `GET` | Returns overall dataset metrics (average price, avg $/sq ft, sample count). |
-| `/analytics/neighborhoods` | `GET` | Returns neighborhood price averages and property counts across Ames. |
-| `/analytics/trends` | `GET` | Returns historical price and size trends grouped by construction decade. |
-| `/analytics/price-vs-sqft` | `GET` | Returns price averages grouped by living area size brackets. |
-| `/analytics/feature-importance` | `GET` | Returns XGBoost model feature weights (% relative importance). |
-
----
-
-## 🚀 How to Run Locally
-
-From the project root directory (`real-estate-ml-api`):
+### 1. Install Dependencies
 ```bash
-npm run dev
+pip install -r requirements.txt
 ```
-*(Or `npm start`)*
 
-This will launch both the FastAPI backend (`http://127.0.0.1:8000`) and the Vite React frontend (`http://localhost:5173`) simultaneously in one terminal window with colorized logs!
-
----
-
-## 🐳 Docker Deployment (Backend)
-To run the backend inside a Docker container:
+### 2. Execute Python Fundamentals & Algorithmic Practice
 ```bash
-cd backend
-docker build -t real-estate-backend .
-docker run -p 8000:8000 real-estate-backend
+python python_fundamentals/01_syntax_declarations_arrays.py
+python python_fundamentals/02_array_operations_algorithms.py
+python python_fundamentals/03_problem_solving_practice.py
+```
+
+### 3. Execute Data Science & ML Reference Suite
+```bash
+python data_science_core/01_numpy_pandas_basics.py
+python data_science_core/02_visualization_matplotlib_seaborn.py
+python data_science_core/03_ml_algorithms_and_metrics.py
+```
+
+### 4. Execute End-to-End Machine Learning Case Studies
+```bash
+# Case Study 1: Real Estate Valuation Monotonic XGBoost Pipeline
+python projects/01_ames_housing_valuation/pipeline.py
+
+# Case Study 2: Passenger Survival Classification Pipeline
+python projects/02_titanic_survival_classification/pipeline.py
 ```
