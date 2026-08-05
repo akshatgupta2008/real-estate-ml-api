@@ -8,11 +8,15 @@ An end-to-end Machine Learning System, REST API, and Visual Analytics Dashboard 
 
 The repository includes **three dedicated interactive interfaces** to test property predictions, explore feature weights, and inspect model behavior:
 
-![Ames Real Estate Valuation Web API Dashboard](file:///C:/Users/SWIFT%20LITE%2014/.gemini/antigravity-ide/brain/7da923fd-4150-4541-9337-cd6858537476/media__1785931090144.png)
+![Streamlit Visual Analytics Dashboard](docs/images/streamlit_dashboard_1.png)
+
+![Model Paradigm CV Benchmark Comparison](docs/images/streamlit_dashboard_2.png)
+
+
 
 ### Available Interfaces:
-1. **Web GUI Dashboard (`http://127.0.0.1:8000/`)**: Modern glassmorphic web page with input fields for property dimensions, live API calculation, and status badges.
-2. **Streamlit Analytics App (`http://localhost:8501`)**: Dedicated Python visual dashboard featuring input sliders, Plotly market position gauge meters, and top feature contribution charts.
+1. **Streamlit Analytics App (`http://localhost:8501`)**: Dedicated Python visual dashboard featuring input sliders, Plotly market position gauge meters, feature weight bar charts, and model benchmark comparisons.
+2. **Web GUI Dashboard (`http://127.0.0.1:8000/`)**: Modern glassmorphic web page with input fields for property dimensions, live API calculation, and status badges.
 3. **Interactive OpenAPI Swagger Docs (`http://127.0.0.1:8000/docs`)**: Interactive REST API documentation for programmatic testing.
 
 ---
@@ -118,20 +122,20 @@ Below is a detailed guide to the **23 features/dimensions** processed by the mod
 
 ## 🚀 How to Run & Test (4 Easy Ways)
 
-### 1. Run FastAPI Web Server & UI (Zero Setup)
+### 1. Run Streamlit Analytics Dashboard
+```bash
+python -m streamlit run src/dashboard.py
+```
+* Opens automatically at **`http://localhost:8501`** with interactive sliders, Plotly market position gauge meters, and top feature contribution charts.
+
+---
+
+### 2. Run FastAPI Web Server & UI
 ```bash
 uvicorn src.api:app --reload
 ```
 * Open **`http://127.0.0.1:8000/`** in your browser for the Web UI Dashboard.
 * Open **`http://127.0.0.1:8000/docs`** for interactive OpenAPI Swagger documentation.
-
----
-
-### 2. Run Streamlit Analytics Dashboard
-```bash
-python -m streamlit run src/dashboard.py
-```
-* Opens automatically at **`http://localhost:8501`** with interactive sliders, Plotly market position gauge meters, and top feature contribution charts.
 
 ---
 
