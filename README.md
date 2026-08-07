@@ -2,6 +2,9 @@
 
 An end-to-end Machine Learning System, REST API, and Visual Analytics Dashboard that predicts single-family property valuations with domain-constrained **Monotonic XGBoost Regression** ($R^2 = 89.32\%$) across 23 structural, quality, area, and amenity dimensions.
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://realestatemlval.streamlit.app/)
+🚀 **Live Streamlit Web App**: [https://realestatemlval.streamlit.app/](https://realestatemlval.streamlit.app/)
+
 ---
 
 ## 📸 Interface Previews & Visual Testing Suite
@@ -15,7 +18,7 @@ The repository includes **three dedicated interactive interfaces** to test prope
 
 
 ### Available Interfaces:
-1. **Streamlit Analytics App (`http://localhost:8501`)**: Dedicated Python visual dashboard featuring input sliders, Plotly market position gauge meters, feature weight bar charts, and model benchmark comparisons.
+1. **Live Streamlit Analytics Dashboard ([realestatemlval.streamlit.app](https://realestatemlval.streamlit.app/))**: Production live dashboard hosted on Streamlit Cloud (or local `http://localhost:8501`) featuring input sliders, Plotly market position gauge meters, feature weight bar charts, and model benchmark comparisons.
 2. **Web GUI Dashboard (`http://127.0.0.1:8000/`)**: Modern glassmorphic web page with input fields for property dimensions, live API calculation, and status badges.
 3. **Interactive OpenAPI Swagger Docs (`http://127.0.0.1:8000/docs`)**: Interactive REST API documentation for programmatic testing.
 
@@ -106,7 +109,8 @@ Below is a detailed guide to the **23 features/dimensions** processed by the mod
   │                                Production Interfaces                                   │
   ├────────────────────────────┬────────────────────────────┬──────────────────────────────┤
   │   FastAPI Web UI Dashboard │   Streamlit Analytics App  │    Interactive CLI Predictor │
-  │   (http://127.0.0.1:8000)  │   (http://localhost:8501)   │    (python src/predict.py)   │
+  │   (http://127.0.0.1:8000)  │ (realestatemlval.streamlit │    (python src/predict.py)   │
+  │                            │           .app)            │                              │
   └────────────────────────────┴────────────────────────────┴──────────────────────────────┘
 ```
 
@@ -123,6 +127,8 @@ Below is a detailed guide to the **23 features/dimensions** processed by the mod
 ## 🚀 How to Run & Test (4 Easy Ways)
 
 ### 1. Run Streamlit Analytics Dashboard
+* **Live Web App**: [https://realestatemlval.streamlit.app/](https://realestatemlval.streamlit.app/)
+* **Run Locally**:
 ```bash
 python -m streamlit run src/dashboard.py
 ```
